@@ -1,49 +1,33 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target="_blank"
-    :href="link"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
+  <div>
+    <q-item
+      clickable
+      v-for="(el, i) in links"
+      :key="i"
+      @click="$router.push(el.link)"
     >
-      <q-icon :name="icon" />
-    </q-item-section>
+      <q-item-section v-if="el.icon" avatar>
+        <q-icon :name="el.icon" />
+      </q-item-section>
 
-    <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>
-        {{ caption }}
-      </q-item-label>
-    </q-item-section>
-  </q-item>
+      <q-item-section>
+        <q-item-label>{{ el.title }}</q-item-label>
+        <q-item-label caption>
+          {{ el.caption }}
+        </q-item-label>
+      </q-item-section>
+    </q-item>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'EssentialLink',
+  name: "EssentialLink",
   props: {
-    title: {
-      type: String,
-      required: true
+    links: {
+      type: Array,
+      default: () => [],
     },
-
-    caption: {
-      type: String,
-      default: ''
-    },
-
-    link: {
-      type: String,
-      default: '#'
-    },
-
-    icon: {
-      type: String,
-      default: ''
-    }
-  }
-}
+  },
+};
 </script>
